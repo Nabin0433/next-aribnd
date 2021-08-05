@@ -1,0 +1,7 @@
+@tailwind components;
+
+@layer components {
+    .button {
+        @apply border rounded-full cursor-pointer px-4 py-2 hover:shadow-lg active:scale-95 active:bg-gray-100 transform transition duration-100 ease-out;
+    }
+}

@@ -1,11 +1,31 @@
 import Image from "next/image";
 import { useState } from "react";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { DateRangePicker } from "react-date-range";
+import { useRouter } from "next/dist/client/router";
 
-const Header = () => {
+const Header = ({ placeholder }) => {
   const [search, setSearch] = useState("");
+  const [startDate, setStartDate] = useState(Date.now());
+  const [endDate, setEndDate] = useState(Date.now());
+  const [guests, setGuests] = useState(1);
+  const router = useRouter();
+  const searchrRanges = {
+    startDate,
+    endDate,
+    key: "selection",
+  };
+  const handleDateRnge = (range) => {
+    setStartDate(range.selection.startDate);
+    setEndDate(range.selection.endDate);
+  };
   return (
     <header className="grid sticky top-0 z-50 grid-cols-3 bg-white shadow-md p-4 md:px-10">
-      <div className="h-10 relative flex items-center cursor-pointer my-auto">
+      <div
+        onClick={() => router.push("/")}
+        className="h-10 relative flex items-center cursor-pointer my-auto"
+      >
         <Image
           src="https://links.papareact.com/qd3"
           alt="Logo"
@@ -14,13 +34,13 @@ const Header = () => {
           objectPosition="left"
         />
       </div>
-      <div className="flex items-center md:border-2 rounded-full md:shadow-md">
+      <div className="flex items-center md:border-2 rounded-full md:shadow-md truncate">
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="pl-6 bg-transparent flex-grow outline-none placeholder-gray-400 text-gray-600"
           type="text"
-          placeholder="search"
+          placeholder={placeholder}
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -28,6 +48,19 @@ const Header = () => {
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          onClick={() => {
+            if ((search, startDate, endDate, guests)) {
+              router.push({
+                pathname: "/search",
+                query: {
+                  location: search,
+                  startDate: startDate.toISOString(),
+                  endDate: endDate.toISOString(),
+                  guests,
+                },
+              });
+            }
+          }}
         >
           <path
             strokeLinecap="round"
@@ -84,6 +117,67 @@ const Header = () => {
           </svg>
         </div>
       </div>
+      {search && (
+        <div className="flex flex-col col-span-3 mx-auto">
+          <DateRangePicker
+            ranges={[searchrRanges]}
+            mindate={Date.now()}
+            rangeColors={["#fd5b61"]}
+            onChange={handleDateRnge}
+          />
+          <div className="flex items-center border-b mb-4">
+            <h2 className="text-2xl flex-grow font-semibold">
+              Number of Guests
+            </h2>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+              />
+            </svg>
+            <input
+              className="w-12 pl-2 text-lg outline-none text-red-400"
+              value={guests}
+              type="number"
+              min={1}
+              onChange={(e) => setGuests(e.target.value)}
+            />
+          </div>
+          <div className="flex items-center">
+            <button
+              className="flex-grow text-gray-500"
+              onClick={() => setSearch("")}
+            >
+              Cancel
+            </button>
+            <button
+              className="flex-grow text-red-500"
+              disabled={!search || !startDate || !endDate || !guests}
+              onClick={() =>
+                router.push({
+                  pathname: "/search",
+                  query: {
+                    location: search,
+                    startDate: startDate.toISOString(),
+                    endDate: endDate.toISOString(),
+                    guests,
+                  },
+                })
+              }
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

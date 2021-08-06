@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import { useRouter } from "next/dist/client/router";
 import { format } from "date-fns";
 import InfoCard from "../components/InfoCard";
+import Map from "../components/Map";
 const search = ({ searchRel }) => {
   const router = useRouter();
   const { location, startDate, endDate, guests } = router?.query;
@@ -32,6 +33,9 @@ const search = ({ searchRel }) => {
               <InfoCard item={item} key={index} />
             ))}
           </div>
+        </section>
+        <section className="hidden xl:inline-flex xl:min-w-[600px]">
+          <Map data={searchRel} />
         </section>
       </main>
       <Footer />

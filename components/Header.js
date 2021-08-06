@@ -44,7 +44,7 @@ const Header = ({ placeholder }) => {
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-8 w-8 md:mx-2 hidden md:inline-flex text-white bg-red-400 rounded-full p-2 cursor-pointer"
+          className="h-8 w-8 md:mx-2 hidden md:inline-flex text-white bg-red-400 rounded-full p-2 cursor-pointer active:scale-90 transition duration-150 hover:bg-red-600"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -74,7 +74,7 @@ const Header = ({ placeholder }) => {
         <p className="hidden md:inline cursor-pointer">Become a host </p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 cursor-pointer"
+          className="h-6 w-6 cursor-pointer hover:text-red-400 active:scale-90 transition duration-150 hover:animate-spin"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -89,7 +89,7 @@ const Header = ({ placeholder }) => {
         <div className="flex items-center justify-end border-2 rounded-full space-x-4 p-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 cursor-pointer"
+            className="h-6 w-6 cursor-pointer hover:text-red-400 active:scale-90 transition duration-150"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -102,8 +102,9 @@ const Header = ({ placeholder }) => {
             />
           </svg>
           <svg
+            onClick={() => router.push("/profile")}
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 cursor-pointer"
+            className="h-6 w-6 cursor-pointer hover:text-red-400 active:scale-90 transition duration-150"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -118,7 +119,7 @@ const Header = ({ placeholder }) => {
         </div>
       </div>
       {search && (
-        <div className="flex flex-col col-span-3 mx-auto">
+        <div className="flex flex-col w-[300px] lg:w-[600px] overflow-scroll col-span-3 mx-auto">
           <DateRangePicker
             ranges={[searchrRanges]}
             mindate={Date.now()}

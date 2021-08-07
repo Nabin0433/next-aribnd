@@ -12,6 +12,7 @@ const MediumCard = ({ item, id }) => {
         router.push({
           pathname: "/product/" + id,
           query: {
+            distance: Math.floor(Math.random() * 100) + "-minute drive",
             title: title,
             img: img,
           },

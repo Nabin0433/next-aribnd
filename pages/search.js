@@ -30,7 +30,7 @@ const search = ({ searchRel }) => {
           </div>
           <div className="flex flex-col">
             {searchRel?.map((item, index) => (
-              <InfoCard item={item} key={index} />
+              <InfoCard item={item} key={index} id={index} />
             ))}
           </div>
         </section>

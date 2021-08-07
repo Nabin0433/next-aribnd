@@ -81,13 +81,11 @@ const Header = ({ placeholder }) => {
           />
         </svg>
       </div>
-      <div
-        className="flex items-center justify-end space-x-4 text-gray-600"
-        onClick={() => router.push("/registerHost")}
-      >
+      <div className="flex items-center justify-end space-x-4 text-gray-600">
         <p className="hidden md:inline cursor-pointer">Become a host </p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
+          onClick={() => router.push("/registerHost")}
           className="h-6 w-6 cursor-pointer hover:text-red-400 active:scale-90 transition duration-150 hover:animate-spin"
           fill="none"
           viewBox="0 0 24 24"
@@ -106,6 +104,7 @@ const Header = ({ placeholder }) => {
           onMouseLeave={() => setModal(false)}
         >
           <svg
+            onClick={() => setModal(true)}
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6 cursor-pointer hover:text-red-400 active:scale-90 transition duration-150"
             fill="none"
@@ -137,7 +136,7 @@ const Header = ({ placeholder }) => {
         </div>
       </div>
       {search && (
-        <div className="flex flex-col w-[300px] lg:w-[600px] overflow-scroll col-span-3 mx-auto">
+        <div className="flex flex-col w-[300px] lg:w-[600px] overflow-scroll scrollbar-hide col-span-3 mx-auto">
           <DateRangePicker
             ranges={[searchrRanges]}
             mindate={Date.now()}

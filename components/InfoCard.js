@@ -1,10 +1,28 @@
+import { useRouter } from "next/dist/client/router";
 import Image from "next/image";
 
-const InfoCard = ({ item }) => {
+const InfoCard = ({ item, id }) => {
   const { img, location, description, star, price, total, long, lat, title } =
     item;
+  const router = useRouter();
+
   return (
-    <div className="flex py-7 px-2 border-b cursor-pointer hover:opacity-80 hover:shadow-lg transition  duration-200 ease-out first:border-t">
+    <div
+      className="flex py-7 px-2 border-b cursor-pointer hover:opacity-80 hover:shadow-lg transition  duration-200 ease-out first:border-t"
+      onClick={() =>
+        router.push({
+          pathname: "/product/" + id,
+          query: {
+            distance: Math.floor(Math.random() * 100) + "-minute drive",
+            img,
+            description,
+            star,
+            price,
+            title,
+          },
+        })
+      }
+    >
       <div className="relative w-40 md:h-52 md:w-80 flex-shrink-0 ">
         <Image
           src={img}

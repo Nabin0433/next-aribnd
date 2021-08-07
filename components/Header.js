@@ -4,12 +4,14 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
 import { useRouter } from "next/dist/client/router";
+import Modal from "./Modal";
 
 const Header = ({ placeholder }) => {
   const [search, setSearch] = useState("");
   const [startDate, setStartDate] = useState(Date.now());
   const [endDate, setEndDate] = useState(Date.now());
   const [guests, setGuests] = useState(1);
+  const [modal, setModal] = useState(false);
   const router = useRouter();
   const searchrRanges = {
     startDate,
@@ -22,6 +24,15 @@ const Header = ({ placeholder }) => {
   };
   return (
     <header className="grid sticky top-0 z-50 grid-cols-3 bg-white shadow-md p-4 md:px-10">
+      {modal && (
+        <div
+          className="w-80 h-96 bg-white shadow-xl absolute top-16 p-8 right-6 rounded-3xl"
+          onMouseEnter={() => setModal(true)}
+          onMouseLeave={() => setModal(false)}
+        >
+          <Modal />
+        </div>
+      )}
       <div
         onClick={() => router.push("/")}
         className="h-10 relative flex items-center cursor-pointer my-auto"
@@ -70,7 +81,10 @@ const Header = ({ placeholder }) => {
           />
         </svg>
       </div>
-      <div className="flex items-center justify-end space-x-4 text-gray-600">
+      <div
+        className="flex items-center justify-end space-x-4 text-gray-600"
+        onClick={() => router.push("/registerHost")}
+      >
         <p className="hidden md:inline cursor-pointer">Become a host </p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +100,11 @@ const Header = ({ placeholder }) => {
             d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-        <div className="flex items-center justify-end border-2 rounded-full space-x-4 p-2">
+        <div
+          className="flex items-center justify-end border-2 rounded-full space-x-4 p-2"
+          onMouseEnter={() => setModal(true)}
+          onMouseLeave={() => setModal(false)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6 cursor-pointer hover:text-red-400 active:scale-90 transition duration-150"

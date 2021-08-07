@@ -29,7 +29,7 @@ export default function Home({ exploreData, cartData }) {
           <h2 className="text-4xl font-semibold pb-5">Explore Nearby</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {exploreData?.map((item, index) => (
-              <SmaillCard key={index} item={item} />
+              <SmaillCard key={index} item={item} id={index} />
             ))}
           </div>
         </section>
@@ -37,7 +37,7 @@ export default function Home({ exploreData, cartData }) {
           <h2 className="text-4xl font-semibold py-8">Live Anyware</h2>
           <div className="flex space-x-3 overflow-scroll scrollbar-hide p-3 -ml-3">
             {cartData?.map((item, index) => (
-              <MediumCard key={index} item={item} />
+              <MediumCard key={index} item={item} id={index} />
             ))}
           </div>
         </section>
